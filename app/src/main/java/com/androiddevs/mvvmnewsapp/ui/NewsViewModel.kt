@@ -9,7 +9,8 @@ import repository.NewsRepository
 import retrofit2.Response
 import util.Resource
 
-class NewsViewModel(
+
+class NewsViewModel(country: String,
     val newsRepository: NewsRepository
 ): ViewModel() {
 
@@ -18,9 +19,8 @@ class NewsViewModel(
     val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
 
-
     init {
-        getBreakingNews("in")
+        getBreakingNews(country)
     }
 
     fun getBreakingNews(countryCode: String) = viewModelScope.launch {
