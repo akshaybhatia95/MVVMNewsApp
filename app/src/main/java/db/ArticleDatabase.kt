@@ -12,7 +12,7 @@ import model.Article
     version = 1
 )
 @TypeConverters(Converters::class)
-abstract class ArticleDatabase: RoomDatabase() {
+abstract class  ArticleDatabase: RoomDatabase() {
 
     abstract fun getArticleDao(): ArticleDao
 
