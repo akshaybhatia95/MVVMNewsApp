@@ -44,7 +44,7 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
         holder.itemView.apply {
             tvDescription.text = article.description
             tvPublishedAt.text = article.publishedAt
-            tvSource.text = article.source?.name
+            tvSource.text = article.source.name
             tvTitle.text = article.title
             Glide.with(this).load(article.urlToImage).into(ivArticleImage)
 

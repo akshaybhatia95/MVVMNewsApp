@@ -44,6 +44,8 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                 delay(Constants.SEARCH_NEWS_TIME_DELAY)
                 editable?.let {
                     if(editable.toString().trim().isNotEmpty()) {
+                        viewModel.searchNewsPage = 1
+                        viewModel.searchNewsResponse = null
                         viewModel.getSearchNews(editable.toString())
                     }
                 }
@@ -59,7 +61,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                         val totalPages = (newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 1) + 1
                         isLastPage = viewModel.searchNewsPage == totalPages
                         if(isLastPage) {
-                            rvBreakingNews.setPadding(0,0,0,0)
+                            rvSearchNews.setPadding(0,0,0,0)
                         }
 
                     }
@@ -118,7 +120,7 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
                     && isTotalMoreThanVisible && isScrolling
 
             if(shouldPaginate) {
-                viewModel.getSearchNews(etSearch.text.toString())
+                viewModel.getSearchNews(etSearch.text.trim().toString())
                 isScrolling = false
             } else {
 

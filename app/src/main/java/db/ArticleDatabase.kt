@@ -27,11 +27,13 @@ abstract class  ArticleDatabase: RoomDatabase() {
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
             instance ?: createDatabase(context).also { instance = it }
         }
+
         val MIGRATION_1_2: Migration = object : Migration(1, 2) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 // Since we didn't alter the table, there's nothing else to do here.
             }
         }
+
         private fun createDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
