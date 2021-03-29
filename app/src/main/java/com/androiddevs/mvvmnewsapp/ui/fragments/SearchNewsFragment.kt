@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
@@ -19,6 +20,7 @@ import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import util.Constants
+import util.Constants.Companion.WEB_VIEW_ARTICLE_KEY_VALUE
 import util.Resource
 
 class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
@@ -82,6 +84,16 @@ class SearchNewsFragment: Fragment(R.layout.fragment_search_news) {
         rvSearchNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
+        }
+
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(WEB_VIEW_ARTICLE_KEY_VALUE, it)
+            }
+            findNavController().navigate(
+                R.id.action_searchNewsFragment_to_articleFragment,
+                bundle
+            )
         }
     }
 

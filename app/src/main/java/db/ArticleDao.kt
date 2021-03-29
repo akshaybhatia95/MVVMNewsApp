@@ -6,7 +6,7 @@ import model.Article
 
 @Dao
 interface ArticleDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun upsert(article: Article): Long
 
     @Query("SELECT * from articles")

@@ -8,12 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
+import util.Constants.Companion.WEB_VIEW_ARTICLE_KEY_VALUE
 import util.Resource
 
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
@@ -46,8 +48,6 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                 }
 
             }
-
-//
         })
     }
 
@@ -65,5 +65,15 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
         }
+        newsAdapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(WEB_VIEW_ARTICLE_KEY_VALUE, it)
+            }
+            findNavController().navigate(
+                    R.id.action_breakingNewsFragment_to_articleFragment,
+                    bundle
+                )
+        }
+
     }
 }

@@ -1,10 +1,17 @@
 package model
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(
-    tableName = "articles"
+    tableName = "articles",
+    indices = arrayOf(
+        Index(value = ["url"],
+        unique = true)
+    )
 )
 data class Article(
     @PrimaryKey(autoGenerate = true)
@@ -17,4 +24,4 @@ data class Article(
     val title: String,
     val url: String,
     val urlToImage: String
-)
+): Serializable
