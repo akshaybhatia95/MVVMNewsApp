@@ -7,5 +7,6 @@ class Constants {
         // api key should not be exposed but this news api is free.
         const val SEARCH_NEWS_TIME_DELAY = 500L
         const val WEB_VIEW_ARTICLE_KEY_VALUE = "article"
+        const val QUERY_PAGE_SIZE = 20
     }
 }
